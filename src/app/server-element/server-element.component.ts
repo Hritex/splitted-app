@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy, ViewChild, ElementRef, ContentChild } from '@angular/core';
 
 @Component({
   selector: 'app-server-element',
@@ -12,6 +12,7 @@ AfterViewInit, AfterViewChecked, OnDestroy {
   @Input('srvElement') element: { type: string; name: string; content: string; } | any;
   @Input() name: string | any;
   @ViewChild('heading') header: ElementRef | any;
+  @ContentChild('contentParagraph') paragraph: ElementRef | any;
 
   constructor() {
     console.log('Constructor called!');
@@ -25,6 +26,7 @@ AfterViewInit, AfterViewChecked, OnDestroy {
   ngOnInit() {
     console.log('ngOnInit called!');
     console.log('Text Content ' + this.header.nativeElement.textContent);
+    console.log('Text Content of Paragraph' + this.paragraph.nativeElement.textContent);
   }
 
   ngDoCheck(): void{
@@ -33,6 +35,7 @@ AfterViewInit, AfterViewChecked, OnDestroy {
 
   ngAfterContentInit(): void {
       console.log('ngAfterContentInit called!'); // Will be called due to ng-content in html
+      console.log('Text Content of Paragraph ' + this.paragraph.nativeElement.textContent);
   }
 
   ngAfterContentChecked(): void {
